@@ -1,7 +1,10 @@
-const _ = require('lodash')
+const EventEmitter = require('events')
 
-const items = [1,[2 , [3 , [4]]]]
+const emmiter = new EventEmitter
 
-const newItems = _.flattenDeep(items)
+emmiter.on("request event", (name , date) => {
+    console.log('event received' , `done by:${name} on ${date} `);
+})
 
-console.log(newItems);
+emmiter.emit('request event', 'MK' ,'16.1.2024')
+
