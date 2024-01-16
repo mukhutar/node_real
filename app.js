@@ -1,10 +1,23 @@
-const EventEmitter = require('events')
 
-const emmiter = new EventEmitter
+const http = require('http')
+const fs= require('fs')
+const { error } = require('console')
 
-emmiter.on("request event", (name , date) => {
-    console.log('event received' , `done by:${name} on ${date} `);
+http
+.createServer(function (req, res) {
+    // const text = readFileSync('./content/bigfile.txt' , 'utf8')
+    // res.end(text)
+
+    const fileStream = fs.createReadStream('./content/bigfile.txt' , 'utf8')
+    fileStream.on('open' , () => {
+        fileStream.pipe()
+
+    })
+
+    fileStream.on('error', (error)=>{
+        res.end(error)
+    })
+
 })
 
-emmiter.emit('request event', 'MK' ,'16.1.2024')
-
+.listen(8080)

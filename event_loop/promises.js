@@ -17,5 +17,27 @@ const start = async() => {
 }
 start()
 
+//// and example of the async and await methods
 
+
+const {readFile} = require('fs').promises
+const http = require('http')
+
+const server = http.createServer((req , res) => {
+    const words = async() => {
+
+        try{
+            const text = await readFile('./content/bigfile.txt' , {encoding:'utf-8'} )
+                if(req.url === '/'){
+                        res.end(text)
+                    }
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    words()  
+})
+
+server.listen(1200)
 
